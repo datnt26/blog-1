@@ -146,10 +146,10 @@
                      </div>
                   </div>
                <?php endforeach;?>
-               <button  data-toggle="tooltip" data-placement="bottom" title="Load More" class = "btn btn-success load-more" type="button" style="width:100%;">
+            </div>
+            <button  data-toggle="tooltip" data-placement="bottom" title="Load More" class = "btn btn-success load-more" type="button" style="width:100%;">
                   LOAD MORE 
                </button>
-            </div>
          </div>
          <!---Sidebar menu started-->
          <div class="hidden-xs hidden-sm col-md-3">

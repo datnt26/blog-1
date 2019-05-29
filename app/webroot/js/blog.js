@@ -83,6 +83,92 @@ $(document).ready(function() {
                 }
             });
     });
+    $(".load-more").click(function(){
+        // Each page has 5 posts
+        var currentPage = Math.floor($("#main").children("div").length / 5) + 1;
+        $.ajax({
+                method: "POST",
+                url: '/blog/posts/loadMore',
+                dataType: 'json',
+                data: {
+                    currentPage : currentPage
+                },
+                success: function (data) {
+                    $.each(data, function(k,v) {
+                        console.log(v);
+                        var html =
+                        '<div class="panel panel-default">' +
+                            '<div class="panel-heading" >' +
+                                '<h3 class="panel-title">' +
+                                    '<a href="javascript:void(0">' +
+                                        '<div class="post-header">' +
+                                            '<div class="post-header-avatar">' +
+                                                '<a href="javascript:void(0">' +
+                                                    '<img src="/blog' +  v.User.avatar +'" alt="" height="35px" width="35px" class="media-object img-rounded">' +
+                                                '</a>' +
+                                            '</div>' +
+                                            '<div class="post-header-body">' +
+                                                '<span>' +
+                                                    '<a href="javascript:void(0">' +
+                                                        v.User.username +
+                                                    '</a>' +
+                                                '</span><br>' +
+                                                '<small>' +
+                                                    '<span>' +
+                                                        '<time>22 minutes</time>' +
+                                                    '</span>' +
+                                                    '<span>ago</span>' +
+                                                '</small>' +
+                                            '</div>' +
+                                        '</div>' +
+                                    '</a>' +
+                                '</h3>' +
+                            '</div>' +
+                            '<div class = "panel-body">' +
+                                '<div>' + 
+                                   '<p class = "text-post">' +
+                                        v.Post.content +
+                                   '</p>' +
+                                '</div>' +
+                                '<div style = "border-top:2px solid #EDEDED;padding-top:10px">' + 
+                                   '<div align = "center" class = "col-xs-4 col-sm-4 col-md-4">' +
+                                      '<a href = "javascript:void(0">' +
+                                         '<span  data-toggle="tooltip" data-placement="bottom" title="Like">' +
+                                            '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>  Like' +
+                                         '</span>' +
+                                      '</a>' +
+                                   '</div>' +
+                                   '<div align="center" class = "col-xs-4 col-sm-4 col-md-4">' +
+                                      '<a href="javascript:void(0">' +
+                                         '<span  data-toggle="tooltip" data-placement="bottom" title="Comment">' +
+                                            '<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>  Comment' +
+                                         '</span>' +
+                                      '</a>' +
+                                   '</div>' +
+                                   '<div align="center" class = "col-xs-4 col-sm-4 col-md-4">' +
+                                      '<a href="javascript:void(0">' +
+                                         '<span  data-toggle="tooltip" data-placement="bottom" title="Share">' +
+                                            '<span class="glyphicon glyphicon-share" aria-hidden="true"></span>  Share' +
+                                         '</span>' +
+                                      '</a>' +
+                                   '</div>' +
+                               '</div>' +
+                            '</div>' +
+                            '<div class="panel-footer">' +
+                                '<div class = "comment-list" >' +
+                                '</div>' +
+                                '<img style = "margin-bottom: 4px" class="img-rounded" src="/blog' + v.User.avatar + '" height="25px" width="25px">' +
+                                '<input class = "comment-typing" id = "' + v.Post.id + '" placeholder="Write a comment..."  style="width: 92%;margin-top: 15px;">' +
+                            '</div>' +
+                        '</div>';
+                        // append new post
+                        $('#main').append(html);
+                    });
+                    // re active createComment();
+                    createComment();
+                }
+            });
+    });
     createComment();
 });
 function createComment() {
