@@ -21,4 +21,21 @@ class CommentsController extends AppController {
 		unset($comment['Comment'],$comment['User']);
 		return $comment;
 	}
+    // create new comment use ajax jquery
+	public function addComment() {
+		$this->layout = false;
+		$this->autoRender = false;	
+
+		if ($this->request->is('Ajax')) {
+			$data = $this->request->data;
+			if (!$data['message']) return;
+			$data['userId'] = $this->Auth->user('id');
+			if ($this->Comment->save($data)) {
+				$insertedId = $this->Comment->getLastInsertId();
+				$comment = $this->Comment->find('threaded', array('conditions' => array('Comment.id' => $insertedId)));
+				$comment = array_map(array($this,'formatComment'), $comment);
+				return json_encode($comment);
+			}
+		}
+	}
 }
