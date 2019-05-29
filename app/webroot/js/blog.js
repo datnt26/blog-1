@@ -78,10 +78,109 @@ $(document).ready(function() {
                     $(html).prependTo('#main');
                     //empty input after create post success
                     $('.post-message').val('');
+                    // re active createComment();
+                    createComment();
                 }
             });
     });
+    createComment();
 });
+function createComment() {
+    $('input').on('keypress', function (e) {
+        if (e.which === 13) {
+            var postId = this.id;
+            var parent_id = null;
+            var message = $(this).val();
+            var type = $(this).attr('class');
+            if (type == 'sub-comment-typing') {
+                parent_id = $(this).closest('div').attr('id');
+                console.log(parent_id);
+            }
+            $.ajax({
+                    method: "POST",
+                    url: '/blog/comments/addComment',
+                    dataType: 'json',
+                    data: {
+                        postId : postId,
+                        message : message,
+                        parent_id : parent_id
+                    },
+                    success: function (data) {
+                        if (type == 'sub-comment-typing') {
+                            var html =
+                                    '<div class = "sub-comment-item">' + 
+                                        '<div class = "comment">' + 
+                                            '<div class = "comment-avatar-user">' + 
+                                                '<a href="#">' + 
+                                                    '<img src="/blog' + data[0].avatar + '" alt="" height="20px" width="20px" class="media-object img-rounded">' +
+                                                '</a>' +
+                                            '</div>' + 
+                                            '<div class="comment-body">' +
+                                                '<p style = "margin: 0;padding: 0;" class="comment">' +
+                                                    '<span>' + 
+                                                        '<a href="#">' +
+                                                            data[0].username +
+                                                        '</a>' + 
+                                                    '</span> ' + data[0].message +
+                                                '</p>' +
+                                                '<div>' + 
+                                                    '<small>' +
+                                                        '<span> <a href="#">Like </a></span> <span> <a href="#">Comment </a></span>' +
+                                                    '</small>' +
+                                                    '<small>' +
+                                                        '<span><time>2 min </time></span><span>ago</span>' +
+                                                    '</small>' +
+                                                '</div>' +
+                                            '</div>' +
+                                        '</div>' +
+                                    '</div>' ;
+                            $('.sub-comment#parent-comment-' + parent_id).append(html);
+                        }
+                        else {
+                            var html = 
+                            '<div class="comment">' +
+                                '<div class="comment-avatar-user">' +
+                                    '<a href="#">' +
+                                        '<img src="/blog' + data[0].avatar + '" alt="" height="27px" width="27px" class="media-object img-rounded">' +
+                                    '</a>' +
+                                '</div>' +
+                                '<div class="comment-body" id = "' + data[0].id + '">' +
+                                    '<div class="sub-comment" id="parent-comment-' + data[0].id + '">' +
+                                        '<p class="" style="margin: 0;padding: 0;">' +  
+                                            '<span>' +
+                                                '<a href="#">' +
+                                                    data[0].username +
+                                                '</a>' +
+                                            '</span> ' + data[0].message +
+                                        '</p>' +
+                                        '<p class="comment" style = "margin: 0;padding: 0;">' +
+                                            '<small>' +
+                                                '<span>' +
+                                                    '<a href="#">Like </a>' +
+                                                '</span>' +
+                                                '<span>' +
+                                                    '<a href="#">Comment </a>' +
+                                                '</span>' +
+                                            '</small>' +
+                                            '<small>' +
+                                                '<span><time>22 min </time></span>' +
+                                                '<span>ago</span>' +
+                                            '</small>' +
+                                       '</p>' +
+                                    '</div>' +
+                                    '<img src="/blog' + data[0].avatar + '" alt="" height="20px" width="20px" style="margin-bottom : 4px" class="img-rounded">' +
+                                    '<input class="sub-comment-typing" id="' + postId +'" placeholder="Write a comment..." style="height:23px;width: 92%;margin-top: 10px;">' +
+                                '</div>' +
+                            '</div>';
+                            $('.comment-list').append(html);
+                        }
+                        $('input').val('');
+                        createComment();
+                    }
+            });
+        }
+    });
+}
 
 
 
