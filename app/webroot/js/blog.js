@@ -13,16 +13,16 @@ $(document).ready(function() {
                         '<div class="panel panel-default">' +
                             '<div class="panel-heading" >' +
                                 '<h3 class="panel-title">' +
-                                    '<a href="#">' +
+                                    '<a href="javascript:void(0">' +
                                         '<div class="post-header">' +
                                             '<div class="post-header-avatar">' +
-                                                '<a href="#">' +
+                                                '<a href="javascript:void(0">' +
                                                     '<img src="/blog' +  data.User.avatar +'" alt="" height="35px" width="35px" class="media-object img-rounded">' +
                                                 '</a>' +
                                             '</div>' +
                                             '<div class="post-header-body">' +
                                                 '<span>' +
-                                                    '<a href="#">' +
+                                                    '<a href="javascript:void(0">' +
                                                         data.User.username +
                                                     '</a>' +
                                                 '</span><br>' +
@@ -45,21 +45,21 @@ $(document).ready(function() {
                                 '</div>' +
                                 '<div style = "border-top:2px solid #EDEDED;padding-top:10px">' + 
                                    '<div align = "center" class = "col-xs-4 col-sm-4 col-md-4">' +
-                                      '<a href = "#">' +
+                                      '<a href = "javascript:void(0">' +
                                          '<span  data-toggle="tooltip" data-placement="bottom" title="Like">' +
                                             '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>  Like' +
                                          '</span>' +
                                       '</a>' +
                                    '</div>' +
                                    '<div align="center" class = "col-xs-4 col-sm-4 col-md-4">' +
-                                      '<a href="#">' +
+                                      '<a href="javascript:void(0">' +
                                          '<span  data-toggle="tooltip" data-placement="bottom" title="Comment">' +
                                             '<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>  Comment' +
                                          '</span>' +
                                       '</a>' +
                                    '</div>' +
                                    '<div align="center" class = "col-xs-4 col-sm-4 col-md-4">' +
-                                      '<a href="#">' +
+                                      '<a href="javascript:void(0">' +
                                          '<span  data-toggle="tooltip" data-placement="bottom" title="Share">' +
                                             '<span class="glyphicon glyphicon-share" aria-hidden="true"></span>  Share' +
                                          '</span>' +
@@ -111,21 +111,21 @@ function createComment() {
                                     '<div class = "sub-comment-item">' + 
                                         '<div class = "comment">' + 
                                             '<div class = "comment-avatar-user">' + 
-                                                '<a href="#">' + 
+                                                '<a href="javascript:void(0">' + 
                                                     '<img src="/blog' + data[0].avatar + '" alt="" height="20px" width="20px" class="media-object img-rounded">' +
                                                 '</a>' +
                                             '</div>' + 
                                             '<div class="comment-body">' +
                                                 '<p style = "margin: 0;padding: 0;" class="comment">' +
                                                     '<span>' + 
-                                                        '<a href="#">' +
+                                                        '<a href="javascript:void(0">' +
                                                             data[0].username +
                                                         '</a>' + 
                                                     '</span> ' + data[0].message +
                                                 '</p>' +
                                                 '<div>' + 
                                                     '<small>' +
-                                                        '<span> <a href="#">Like </a></span> <span> <a href="#">Comment </a></span>' +
+                                                        '<span> <a href="javascript:void(0">Like </a></span> <span> <a href="javascript:void(0">Comment </a></span>' +
                                                     '</small>' +
                                                     '<small>' +
                                                         '<span><time>2 min </time></span><span>ago</span>' +
@@ -140,7 +140,7 @@ function createComment() {
                             var html = 
                             '<div class="comment">' +
                                 '<div class="comment-avatar-user">' +
-                                    '<a href="#">' +
+                                    '<a href="javascript:void(0">' +
                                         '<img src="/blog' + data[0].avatar + '" alt="" height="27px" width="27px" class="media-object img-rounded">' +
                                     '</a>' +
                                 '</div>' +
@@ -148,7 +148,7 @@ function createComment() {
                                     '<div class="sub-comment" id="parent-comment-' + data[0].id + '">' +
                                         '<p class="" style="margin: 0;padding: 0;">' +  
                                             '<span>' +
-                                                '<a href="#">' +
+                                                '<a href="javascript:void(0">' +
                                                     data[0].username +
                                                 '</a>' +
                                             '</span> ' + data[0].message +
@@ -156,10 +156,10 @@ function createComment() {
                                         '<p class="comment" style = "margin: 0;padding: 0;">' +
                                             '<small>' +
                                                 '<span>' +
-                                                    '<a href="#">Like </a>' +
+                                                    '<a href="javascript:void(0">Like </a>' +
                                                 '</span>' +
                                                 '<span>' +
-                                                    '<a href="#">Comment </a>' +
+                                                    '<a href="javascript:void(0">Comment </a>' +
                                                 '</span>' +
                                             '</small>' +
                                             '<small>' +
