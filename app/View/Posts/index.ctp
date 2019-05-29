@@ -2,6 +2,24 @@
 <div class="container">
    <div class="container-fluid" id="wrapper">
       <div class="row">
+         <nav class="navbar navbar-default">
+             <div class="container-fluid">
+                  <div class="navbar-header">
+                     <?php echo $this->Html->link('Blog',array('controller' => 'posts','action' => 'index','full_base' => true), array('class' => 'navbar-brand')); ?>
+                  </div>
+                  <ul class="nav navbar-nav navbar-right">
+                    <li>
+                     <?php echo $this->Html->link('Home',array('controller' => 'posts','action' => 'index','full_base' => true)); ?>
+                  </li>
+                    <li><a href="javascript:void(0)">Profile</a></li>
+                  <li>
+                     <?php echo $this->Html->link('Logout',array('controller' => 'users','action' => 'logout','full_base' => true)); ?>
+                  </li>
+                  </ul>
+             </div>
+         </nav>
+      </div>
+      <div class="row">
          <div class="hidden-xs col-sm-4 col-md-3">
             <!--left menu-->
          </div>
@@ -19,16 +37,16 @@
                      <!-- post header -->
                      <div class="panel-heading" >
                         <h3 class="panel-title">
-                           <a href="#">
+                           <a href="javascript:void(0)">
                               <div class="post-header">
                                  <div class="post-header-avatar">
-                                    <a href="#">
+                                    <a href="javascript:void(0)">
                                        <?php echo $this->Html->image($post['User']['avatar'], array("alt" => "","height" => "35px","width" => "35px","class" => "media-object img-rounded"))?>
                                     </a>
                                  </div>
                                  <div class="post-header-body">
                                        <span>
-                                          <a href="#">
+                                          <a href="javascript:void(0)">
                                              <?php echo $post['User']['username'];?>
                                           </a>
                                        </span><br>
@@ -47,21 +65,21 @@
                         </div>
                         <div style = "border-top:2px solid #EDEDED;padding-top:10px">  
                            <div align = "center" class = "col-xs-4 col-sm-4 col-md-4">
-                              <a href="#">
+                              <a href="javascript:void(0)">
                                  <span  data-toggle="tooltip" data-placement="bottom" title="Like">
                                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>  Like
                                  </span>
                               </a>
                            </div>
                            <div align = "center" class = "col-xs-4 col-sm-4 col-md-4">
-                              <a href="#">
+                              <a href="javascript:void(0)">
                                  <span  data-toggle="tooltip" data-placement="bottom" title="Comment">
                                     <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>  Comment
                                  </span>
                               </a>
                            </div>
                            <div align = "center" class = "col-xs-4 col-sm-4 col-md-4">
-                              <a href="#">
+                              <a href="javascript:void(0)">
                                  <span  data-toggle="tooltip" data-placement="bottom" title="Share">
                                     <span class="glyphicon glyphicon-share" aria-hidden="true"></span>  Share
                                  </span>
@@ -75,19 +93,19 @@
                            <?php foreach($post['Comment'] as $value) :?>
                               <div class="comment">
                                  <div class="comment-avatar-user">
-                                    <a href="#">
+                                    <a href="javascript:void(0)">
                                        <?php echo $this->Html->image($value['avatar'], array("alt" => "","height" => "27px","width" => "27px","class" => "media-object img-rounded"))?>
                                     </a>
                                  </div>
                                  <div class = "comment-body" id = "<?php echo $value['id']?>">
                                     <div class = "sub-comment"  id = "<?php echo 'parent-comment-' . $value['id']?>">
                                        <p class="" style = "margin: 0;padding: 0;"> 
-                                          <span><a href="#"><?php echo $value['username'];?></a></span> <?php echo $value['message'];?> 
+                                          <span><a href="javascript:void(0)"><?php echo $value['username'];?></a></span> <?php echo $value['message'];?> 
                                        </p>
                                        <p class="comment" style = "margin: 0;padding: 0;"> 
                                           <small>
-                                             <span> <a href="#">Like </a></span> 
-                                             <span><a href="#">Comment </a></span>
+                                             <span> <a href="javascript:void(0)">Like </a></span> 
+                                             <span><a href="javascript:void(0)">Comment </a></span>
                                           </small> 
                                           <small><span><time>22 min </time></span><span>ago</span></small>
                                        </p>
@@ -96,14 +114,14 @@
                                              <div class = "sub-comment-item">
                                                 <div class = "comment">
                                                    <div class = "comment-avatar-user">
-                                                      <a href="#">
+                                                      <a href="javascript:void(0)">
                                                          <?php echo $this->Html->image($subComment['avatar'], array("alt" => "","height" => "20px","width" => "20px","class" => "media-object img-rounded"))?>
                                                       </a>
                                                    </div>
                                                    <div class="comment-body">
-                                                      <p style = "margin: 0;padding: 0;" class="comment"> <span><a href="#"><?php echo $subComment['username']?></a></span> <?php echo $subComment['message']?> </p>
+                                                      <p style = "margin: 0;padding: 0;" class="comment"> <span><a href="javascript:void(0)"><?php echo $subComment['username']?></a></span> <?php echo $subComment['message']?> </p>
                                                       <div>
-                                                         <small><span> <a href="#">Like </a></span> <span> <a href="#">Comment </a></span></small><small><span><time>2 min </time></span><span>ago</span></small>
+                                                         <small><span> <a href="javascript:void(0)">Like </a></span> <span> <a href="javascript:void(0)">Comment </a></span></small><small><span><time>2 min </time></span><span>ago</span></small>
                                                       </div>
                                                    </div>
                                                 </div>
@@ -128,8 +146,10 @@
                      </div>
                   </div>
                <?php endforeach;?>
-               <button  data-toggle="tooltip" data-placement="bottom" title="Load More" class="btn btn-default" type="button" style="width:100%; background-color:#4267b2">LOAD MORE </button>
             </div>
+            <button  data-toggle="tooltip" data-placement="bottom" title="Load More" class = "btn btn-success load-more" type="button" style="width:100%;">
+                  LOAD MORE 
+               </button>
          </div>
          <!---Sidebar menu started-->
          <div class="hidden-xs hidden-sm col-md-3">
