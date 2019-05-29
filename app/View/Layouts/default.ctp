@@ -32,6 +32,7 @@
 		echo $this->Html->script('jquery-2.1.1.min');
 		echo $this->Html->script('jquery-ui');
 		echo $this->Html->script('bootstraps/bootstrap.min');
+		echo $this->Html->script('blog');
 		// config css
 		echo $this->Html->css('style');
 		echo $this->Html->css('fonts/font-awesome.min');
