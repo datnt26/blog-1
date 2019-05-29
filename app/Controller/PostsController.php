@@ -36,7 +36,7 @@ class PostsController extends AppController {
 			$currentPage = $data['currentPage'];
 			$param = array(
 						'limit' => 5,
-						'offset' => ($currentPage - 1) * 5,
+						'offset' => $currentPage * 5,
 						'order' => array('Post.created DESC')
 					);		
 			$posts = $this->Post->find("all",$param);

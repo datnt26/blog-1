@@ -89,7 +89,7 @@
                      </div>
                      <!-- post footer -->
                      <div class="panel-footer">
-                        <div class = "comment-list" >
+                        <div class = "comment-list" id = "<?php echo $post['Post']['id']?>">
                            <?php foreach($post['Comment'] as $value) :?>
                               <div class="comment">
                                  <div class="comment-avatar-user">
@@ -119,7 +119,11 @@
                                                       </a>
                                                    </div>
                                                    <div class="comment-body">
-                                                      <p style = "margin: 0;padding: 0;" class="comment"> <span><a href="javascript:void(0)"><?php echo $subComment['username']?></a></span> <?php echo $subComment['message']?> </p>
+                                                      <p style = "margin: 0;padding: 0;" class="comment"> 
+                                                         <span>
+                                                            <a href="javascript:void(0)"><?php echo $subComment['username']?></a>
+                                                         </span> <?php echo $subComment['message']?> 
+                                                      </p>
                                                       <div>
                                                          <small><span> <a href="javascript:void(0)">Like </a></span> <span> <a href="javascript:void(0)">Comment </a></span></small><small><span><time>2 min </time></span><span>ago</span></small>
                                                       </div>
