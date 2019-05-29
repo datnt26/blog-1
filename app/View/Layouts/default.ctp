@@ -33,6 +33,7 @@
 		echo $this->Html->script('jquery-ui');
 		echo $this->Html->script('bootstraps/bootstrap.min');
 		// config css
+		echo $this->Html->css('style');
 		echo $this->Html->css('fonts/font-awesome.min');
 		echo $this->Html->css('bootstrap/bootstrap.min');
 		echo $this->Html->css('bootstrap/bootstrap-theme.min');

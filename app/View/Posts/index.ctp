@@ -1,0 +1,140 @@
+<?php if (isset($title)) $this->assign('title', $title);?>
+<div class="container">
+   <div class="container-fluid" id="wrapper">
+      <div class="row">
+         <div class="hidden-xs col-sm-4 col-md-3">
+            <!--left menu-->
+         </div>
+         <div class="col-xs-12 col-sm-8 col-md-6">
+            <div class="input-group">
+               <input class="post-message form-control" type="text" name="content" placeholder="Make a post...">
+               <span class="input-group-btn">
+                 <button class="post btn btn-success" type="submit" name="post">Post</button>
+               </span>
+            </div><hr>
+            <div id="main">
+               <!--main-->
+               <?php foreach($posts as $post) : ?>
+                  <div class="panel panel-default">
+                     <!-- post header -->
+                     <div class="panel-heading" >
+                        <h3 class="panel-title">
+                           <a href="#">
+                              <div class="post-header">
+                                 <div class="post-header-avatar">
+                                    <a href="#">
+                                       <?php echo $this->Html->image($post['User']['avatar'], array("alt" => "","height" => "35px","width" => "35px","class" => "media-object img-rounded"))?>
+                                    </a>
+                                 </div>
+                                 <div class="post-header-body">
+                                       <span>
+                                          <a href="#">
+                                             <?php echo $post['User']['username'];?>
+                                          </a>
+                                       </span><br>
+                                    <small><span><time>22 minutes</time></span><span>ago</span></small>
+                                 </div>
+                              </div>
+                           </a>
+                        </h3>
+                     </div>
+                     <!-- post body -->
+                     <div class="panel-body">
+                        <div>
+                           <p class="text-post">
+                              <?php echo $post['Post']['content'];?>
+                           </p>
+                        </div>
+                        <div style = "border-top:2px solid #EDEDED;padding-top:10px">  
+                           <div align = "center" class = "col-xs-4 col-sm-4 col-md-4">
+                              <a href="#">
+                                 <span  data-toggle="tooltip" data-placement="bottom" title="Like">
+                                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>  Like
+                                 </span>
+                              </a>
+                           </div>
+                           <div align = "center" class = "col-xs-4 col-sm-4 col-md-4">
+                              <a href="#">
+                                 <span  data-toggle="tooltip" data-placement="bottom" title="Comment">
+                                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>  Comment
+                                 </span>
+                              </a>
+                           </div>
+                           <div align = "center" class = "col-xs-4 col-sm-4 col-md-4">
+                              <a href="#">
+                                 <span  data-toggle="tooltip" data-placement="bottom" title="Share">
+                                    <span class="glyphicon glyphicon-share" aria-hidden="true"></span>  Share
+                                 </span>
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- post footer -->
+                     <div class="panel-footer">
+                        <div class = "comment-list" >
+                           <?php foreach($post['Comment'] as $value) :?>
+                              <div class="comment">
+                                 <div class="comment-avatar-user">
+                                    <a href="#">
+                                       <?php echo $this->Html->image($value['avatar'], array("alt" => "","height" => "27px","width" => "27px","class" => "media-object img-rounded"))?>
+                                    </a>
+                                 </div>
+                                 <div class = "comment-body" id = "<?php echo $value['id']?>">
+                                    <div class = "sub-comment"  id = "<?php echo 'parent-comment-' . $value['id']?>">
+                                       <p class="" style = "margin: 0;padding: 0;"> 
+                                          <span><a href="#"><?php echo $value['username'];?></a></span> <?php echo $value['message'];?> 
+                                       </p>
+                                       <p class="comment" style = "margin: 0;padding: 0;"> 
+                                          <small>
+                                             <span> <a href="#">Like </a></span> 
+                                             <span><a href="#">Comment </a></span>
+                                          </small> 
+                                          <small><span><time>22 min </time></span><span>ago</span></small>
+                                       </p>
+                                       <?php if($value['subComment']) : ?>
+                                          <?php foreach($value['subComment'] as $subComment) : ?>
+                                             <div class = "sub-comment-item">
+                                                <div class = "comment">
+                                                   <div class = "comment-avatar-user">
+                                                      <a href="#">
+                                                         <?php echo $this->Html->image($subComment['avatar'], array("alt" => "","height" => "20px","width" => "20px","class" => "media-object img-rounded"))?>
+                                                      </a>
+                                                   </div>
+                                                   <div class="comment-body">
+                                                      <p style = "margin: 0;padding: 0;" class="comment"> <span><a href="#"><?php echo $subComment['username']?></a></span> <?php echo $subComment['message']?> </p>
+                                                      <div>
+                                                         <small><span> <a href="#">Like </a></span> <span> <a href="#">Comment </a></span></small><small><span><time>2 min </time></span><span>ago</span></small>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          <?php endforeach?>
+                                       <?php endif?>
+                                    </div>
+                                    <?php echo $this->Html->image($avatarCurrentUser, 
+                                                array("alt" => "","height" => "20px","width" => "20px",
+                                                      "style" => array("margin-bottom : 4px"),
+                                                      "class" => "img-rounded"))?>
+                                    <input class = "sub-comment-typing" id = "<?php echo $post['Post']['id']?>" placeholder="Write a comment..."  style="height:23px;width: 92%;margin-top: 10px;">
+                                 </div>
+                              </div>
+                           <?php endforeach?>
+                        </div>
+                        <?php echo $this->Html->image($avatarCurrentUser, 
+                                                array("alt" => "","height" => "25px","width" => "25px",
+                                                      "style" => array("margin-bottom : 4px"),
+                                                      "class" => "img-rounded"))?>
+                        <input class = "comment-typing" id = "<?php echo $post['Post']['id']?>" placeholder="Write a comment..."  style="width: 92%;margin-top: 15px;">
+                     </div>
+                  </div>
+               <?php endforeach;?>
+               <button  data-toggle="tooltip" data-placement="bottom" title="Load More" class="btn btn-default" type="button" style="width:100%; background-color:#4267b2">LOAD MORE </button>
+            </div>
+         </div>
+         <!---Sidebar menu started-->
+         <div class="hidden-xs hidden-sm col-md-3">
+            
+         </div>
+      </div>
+   </div>
+</div>
