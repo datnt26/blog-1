@@ -137,7 +137,7 @@
                                                 array("alt" => "","height" => "20px","width" => "20px",
                                                       "style" => array("margin-bottom : 4px"),
                                                       "class" => "img-rounded"))?>
-                                    <input class = "sub-comment-typing" id = "<?php echo $post['Post']['id']?>" placeholder="Write a comment..."  style="height:23px;width: 92%;margin-top: 10px;">
+                                    <input class = "comment-typing sub-comment-typing" id = "<?php echo $post['Post']['id']?>" placeholder="Write a comment..."  style="height:23px;width: 92%;margin-top: 10px;">
                                  </div>
                               </div>
                            <?php endforeach?>
