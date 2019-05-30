@@ -9,73 +9,31 @@ $(document).ready(function() {
                     content : content
                 },
                 success: function (data) {
-                    var html =
-                        '<div class="panel panel-default">' +
-                            '<div class="panel-heading" >' +
-                                '<h3 class="panel-title">' +
-                                    '<a href="javascript:void(0">' +
-                                        '<div class="post-header">' +
-                                            '<div class="post-header-avatar">' +
-                                                '<a href="javascript:void(0">' +
-                                                    '<img src="/blog' +  data.User.avatar +'" alt="" height="35px" width="35px" class="media-object img-rounded">' +
-                                                '</a>' +
-                                            '</div>' +
-                                            '<div class="post-header-body">' +
-                                                '<span>' +
-                                                    '<a href="javascript:void(0">' +
-                                                        data.User.username +
-                                                    '</a>' +
-                                                '</span><br>' +
-                                                '<small>' +
-                                                    '<span>' +
-                                                        '<time>22 minutes</time>' +
-                                                    '</span>' +
-                                                    '<span>ago</span>' +
-                                                '</small>' +
-                                            '</div>' +
-                                        '</div>' +
-                                    '</a>' +
-                                '</h3>' +
-                            '</div>' +
-                            '<div class = "panel-body">' +
-                                '<div>' + 
-                                   '<p class = "text-post">' +
-                                        data.Post.content +
-                                   '</p>' +
-                                '</div>' +
-                                '<div style = "border-top:2px solid #EDEDED;padding-top:10px">' + 
-                                   '<div align = "center" class = "col-xs-4 col-sm-4 col-md-4">' +
-                                      '<a href = "javascript:void(0">' +
-                                         '<span  data-toggle="tooltip" data-placement="bottom" title="Like">' +
-                                            '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>  Like' +
-                                         '</span>' +
-                                      '</a>' +
-                                   '</div>' +
-                                   '<div align="center" class = "col-xs-4 col-sm-4 col-md-4">' +
-                                      '<a href="javascript:void(0">' +
-                                         '<span  data-toggle="tooltip" data-placement="bottom" title="Comment">' +
-                                            '<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>  Comment' +
-                                         '</span>' +
-                                      '</a>' +
-                                   '</div>' +
-                                   '<div align="center" class = "col-xs-4 col-sm-4 col-md-4">' +
-                                      '<a href="javascript:void(0">' +
-                                         '<span  data-toggle="tooltip" data-placement="bottom" title="Share">' +
-                                            '<span class="glyphicon glyphicon-share" aria-hidden="true"></span>  Share' +
-                                         '</span>' +
-                                      '</a>' +
-                                   '</div>' +
-                               '</div>' +
-                            '</div>' +
-                            '<div class="panel-footer">' +
-                                '<div class = "comment-list" >' +
-                                '</div>' +
-                                '<img style = "margin-bottom: 4px" class="img-rounded" src="/blog' + data.User.avatar + '" height="25px" width="25px">' +
-                                '<input class = "comment-typing" id = "' + data.Post.id + '" placeholder="Write a comment..."  style="width: 92%;margin-top: 15px;">' +
-                            '</div>' +
-                        '</div>';
-                    // append new post
-                    $(html).prependTo('#main');
+                    // init new post
+                    var post = $('<div>').attr({class: 'panel panel-default'}).prependTo($('#main'));
+
+                    /* Part header of post*/
+                    var post_header = $('<div>').attr({class:'panel-heading'}).appendTo($(post));
+                    var post_header_title = $('<h3 class="panel-title"><a href="javascript:void(0)"><div class="post-header"></div></a></h3>').appendTo($(post_header));
+                    var post_header_avatar = $('<div>').attr({class:'post-header-avatar',}).appendTo($(post_header_title));
+                    $('<a href="javascript:void(0)"><img src="/blog'+ data.User.avatar +'" alt="" height="35px" width="35px" class="media-object img-rounded"></a>').appendTo($(post_header_avatar));
+                    var post_header_body = $('<div>').attr({class:'post-header-body',}).appendTo($(post_header_title));
+                    $('<span> <a href="javascript:void(0)">' + data.User.username +'</a> </span><br> <small><span><time>22 minutes</time></span><span>ago</span></small>').appendTo($(post_header_body));
+                    /* End part header of post*/ 
+
+                    /* Part content of post*/
+                    var post_content = $('<div>').attr({ class:'panel-body',}).appendTo($(post));
+                    $('<div><p class="text-post">' + data.Post.content + '</p></div>').appendTo($(post_content));
+                    $('<div style = "border-top:2px solid #EDEDED;padding-top:10px"> <div align = "center" class = "col-xs-4 col-sm-4 col-md-4"> <a href="javascript:void(0)"> <span data-toggle="tooltip" data-placement="bottom" title="Like"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like </span> </a> </div> <div align = "center" class = "col-xs-4 col-sm-4 col-md-4"> <a href="javascript:void(0)"> <span data-toggle="tooltip" data-placement="bottom" title="Comment"> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment </span> </a> </div> <div align = "center" class = "col-xs-4 col-sm-4 col-md-4"> <a href="javascript:void(0)"> <span data-toggle="tooltip" data-placement="bottom" title="Share"> <span class="glyphicon glyphicon-share" aria-hidden="true"></span> Share </span> </a> </div> </div>').appendTo($(post_content));
+                    /* End part content of post*/                   
+
+                    /* Part footer of post*/
+                    var post_footer = $('<div>').attr({class:'panel-footer',}).appendTo($(post));
+                    var comment_list = $('<div>').attr({class:'comment-list',id: data.Post.id}).appendTo($(post_footer));
+                    $('<img src="/blog' + data.User.avatar + '" alt="" height="25px" width="25px" style="margin-bottom : 4px" class="img-rounded">').appendTo($(post_footer));
+                    $('<input class="comment-typing" id="' + data.Post.id + '" placeholder="Write a comment..." style="width: 92%;margin-top: 15px;">').appendTo($(post_footer));
+                    /* End part footer of post*/
+
                     //empty input after create post success
                     $('.post-message').val('');
                     // re active createComment();
@@ -85,7 +43,8 @@ $(document).ready(function() {
     });
     $(".load-more").click(function(){
         // Each page has 5 posts
-        var currentPage = Math.floor($("#main").children("div").length / 5) + 1;
+        if ($("#main").children("div").length < 5) return;
+        var currentPage = (Math.floor($("#main").children("div").length % 5) == 0) ? Math.floor($("#main").children("div").length / 5) : Math.floor($("#main").children("div").length / 5) + 1;
         $.ajax({
                 method: "POST",
                 url: '/blog/posts/loadMore',
@@ -94,82 +53,36 @@ $(document).ready(function() {
                     currentPage : currentPage
                 },
                 success: function (data) {
+                    
                     $.each(data, function(k,v) {
-                        console.log(v);
-                        var html =
-                        '<div class="panel panel-default">' +
-                            '<div class="panel-heading" >' +
-                                '<h3 class="panel-title">' +
-                                    '<a href="javascript:void(0">' +
-                                        '<div class="post-header">' +
-                                            '<div class="post-header-avatar">' +
-                                                '<a href="javascript:void(0">' +
-                                                    '<img src="/blog' +  v.User.avatar +'" alt="" height="35px" width="35px" class="media-object img-rounded">' +
-                                                '</a>' +
-                                            '</div>' +
-                                            '<div class="post-header-body">' +
-                                                '<span>' +
-                                                    '<a href="javascript:void(0">' +
-                                                        v.User.username +
-                                                    '</a>' +
-                                                '</span><br>' +
-                                                '<small>' +
-                                                    '<span>' +
-                                                        '<time>22 minutes</time>' +
-                                                    '</span>' +
-                                                    '<span>ago</span>' +
-                                                '</small>' +
-                                            '</div>' +
-                                        '</div>' +
-                                    '</a>' +
-                                '</h3>' +
-                            '</div>' +
-                            '<div class = "panel-body">' +
-                                '<div>' + 
-                                   '<p class = "text-post">' +
-                                        v.Post.content +
-                                   '</p>' +
-                                '</div>' +
-                                '<div style = "border-top:2px solid #EDEDED;padding-top:10px">' + 
-                                   '<div align = "center" class = "col-xs-4 col-sm-4 col-md-4">' +
-                                      '<a href = "javascript:void(0">' +
-                                         '<span  data-toggle="tooltip" data-placement="bottom" title="Like">' +
-                                            '<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>  Like' +
-                                         '</span>' +
-                                      '</a>' +
-                                   '</div>' +
-                                   '<div align="center" class = "col-xs-4 col-sm-4 col-md-4">' +
-                                      '<a href="javascript:void(0">' +
-                                         '<span  data-toggle="tooltip" data-placement="bottom" title="Comment">' +
-                                            '<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>  Comment' +
-                                         '</span>' +
-                                      '</a>' +
-                                   '</div>' +
-                                   '<div align="center" class = "col-xs-4 col-sm-4 col-md-4">' +
-                                      '<a href="javascript:void(0">' +
-                                         '<span  data-toggle="tooltip" data-placement="bottom" title="Share">' +
-                                            '<span class="glyphicon glyphicon-share" aria-hidden="true"></span>  Share' +
-                                         '</span>' +
-                                      '</a>' +
-                                   '</div>' +
-                               '</div>' +
-                            '</div>' +
-                            '<div class="panel-footer">' +
-                                '<div class = "comment-list" >' +
-                                '</div>' +
-                                '<img style = "margin-bottom: 4px" class="img-rounded" src="/blog' + v.User.avatar + '" height="25px" width="25px">' +
-                                '<input class = "comment-typing" id = "' + v.Post.id + '" placeholder="Write a comment..."  style="width: 92%;margin-top: 15px;">' +
-                            '</div>' +
-                        '</div>';
-                        // append new post
-                        $('#main').append(html);
+                        // init new post
+                        var post = $('<div>').attr({class: 'panel panel-default'}).appendTo($('#main'));
+
+                        /* Part header of post*/
+                        var post_header = $('<div>').attr({class:'panel-heading'}).appendTo($(post));
+                        var post_header_title = $('<h3 class="panel-title"><a href="javascript:void(0)"><div class="post-header"></div></a></h3>').appendTo($(post_header));
+                        var post_header_avatar = $('<div>').attr({class:'post-header-avatar',}).appendTo($(post_header_title));
+                        $('<a href="javascript:void(0)"><img src="/blog'+ v.User.avatar +'" alt="" height="35px" width="35px" class="media-object img-rounded"></a>').appendTo($(post_header_avatar));
+                        var post_header_body = $('<div>').attr({class:'post-header-body',}).appendTo($(post_header_title));
+                        $('<span> <a href="javascript:void(0)">' + v.User.username +'</a> </span><br> <small><span><time>22 minutes</time></span><span>ago</span></small>').appendTo($(post_header_body));
+                        /* End part header of post*/ 
+
+                        /* Part content of post*/
+                        var post_content = $('<div>').attr({ class:'panel-body',}).appendTo($(post));
+                        $('<div><p class="text-post">' + v.Post.content + '</p></div>').appendTo($(post_content));
+                        $('<div style = "border-top:2px solid #EDEDED;padding-top:10px"> <div align = "center" class = "col-xs-4 col-sm-4 col-md-4"> <a href="javascript:void(0)"> <span data-toggle="tooltip" data-placement="bottom" title="Like"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like </span> </a> </div> <div align = "center" class = "col-xs-4 col-sm-4 col-md-4"> <a href="javascript:void(0)"> <span data-toggle="tooltip" data-placement="bottom" title="Comment"> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment </span> </a> </div> <div align = "center" class = "col-xs-4 col-sm-4 col-md-4"> <a href="javascript:void(0)"> <span data-toggle="tooltip" data-placement="bottom" title="Share"> <span class="glyphicon glyphicon-share" aria-hidden="true"></span> Share </span> </a> </div> </div>').appendTo($(post_content));
+                        /* End part content of post*/                   
+
+                        /* Part footer of post*/
+                        var post_footer = $('<div>').attr({class:'panel-footer',}).appendTo($(post));
+                        var comment_list = $('<div>').attr({class:'comment-list',id: v.Post.id}).appendTo($(post_footer));
+                        $('<img src="/blog' + v.User.avatar + '" alt="" height="25px" width="25px" style="margin-bottom : 4px" class="img-rounded">').appendTo($(post_footer));
+                        $('<input class="comment-typing" id="' + v.Post.id + '" placeholder="Write a comment..." style="width: 92%;margin-top: 15px;">').appendTo($(post_footer));
+                        /* End part footer of post*/
                     });
-                    // re active createComment();
-                    createComment();
                 }
             });
     });
-    createComment();
 });
 function createComment() {
     $('input').on('keypress', function (e) {
@@ -192,76 +105,32 @@ function createComment() {
                         parent_id : parent_id
                     },
                     success: function (data) {
-                        if (type == 'sub-comment-typing') {
-                            var html =
-                                    '<div class = "sub-comment-item">' + 
-                                        '<div class = "comment">' + 
-                                            '<div class = "comment-avatar-user">' + 
-                                                '<a href="javascript:void(0">' + 
-                                                    '<img src="/blog' + data[0].avatar + '" alt="" height="20px" width="20px" class="media-object img-rounded">' +
-                                                '</a>' +
-                                            '</div>' + 
-                                            '<div class="comment-body">' +
-                                                '<p style = "margin: 0;padding: 0;" class="comment">' +
-                                                    '<span>' + 
-                                                        '<a href="javascript:void(0">' +
-                                                            data[0].username +
-                                                        '</a>' + 
-                                                    '</span> ' + data[0].message +
-                                                '</p>' +
-                                                '<div>' + 
-                                                    '<small>' +
-                                                        '<span> <a href="javascript:void(0">Like </a></span> <span> <a href="javascript:void(0">Comment </a></span>' +
-                                                    '</small>' +
-                                                    '<small>' +
-                                                        '<span><time>2 min </time></span><span>ago</span>' +
-                                                    '</small>' +
-                                                '</div>' +
-                                            '</div>' +
-                                        '</div>' +
-                                    '</div>' ;
-                            $('.sub-comment#parent-comment-' + parent_id).append(html);
-                        }
-                        else {
-                            var html = 
-                            '<div class="comment">' +
-                                '<div class="comment-avatar-user">' +
-                                    '<a href="javascript:void(0">' +
-                                        '<img src="/blog' + data[0].avatar + '" alt="" height="27px" width="27px" class="media-object img-rounded">' +
-                                    '</a>' +
-                                '</div>' +
-                                '<div class="comment-body" id = "' + data[0].id + '">' +
-                                    '<div class="sub-comment" id="parent-comment-' + data[0].id + '">' +
-                                        '<p class="" style="margin: 0;padding: 0;">' +  
-                                            '<span>' +
-                                                '<a href="javascript:void(0">' +
-                                                    data[0].username +
-                                                '</a>' +
-                                            '</span> ' + data[0].message +
-                                        '</p>' +
-                                        '<p class="comment" style = "margin: 0;padding: 0;">' +
-                                            '<small>' +
-                                                '<span>' +
-                                                    '<a href="javascript:void(0">Like </a>' +
-                                                '</span>' +
-                                                '<span>' +
-                                                    '<a href="javascript:void(0">Comment </a>' +
-                                                '</span>' +
-                                            '</small>' +
-                                            '<small>' +
-                                                '<span><time>22 min </time></span>' +
-                                                '<span>ago</span>' +
-                                            '</small>' +
-                                       '</p>' +
-                                    '</div>' +
-                                    '<img src="/blog' + data[0].avatar + '" alt="" height="20px" width="20px" style="margin-bottom : 4px" class="img-rounded">' +
-                                    '<input class="sub-comment-typing" id="' + postId +'" placeholder="Write a comment..." style="height:23px;width: 92%;margin-top: 10px;">' +
-                                '</div>' +
-                            '</div>';
-                            $('.comment-list').append(html);
-                        }
                         $('input').val('');
-                        createComment();
+                        if (type == 'sub-comment-typing') {
+                            // init new post
+                            var sub_comment_item = $('<div>').attr({class: 'sub-comment-item'}).appendTo($('.sub-comment#parent-comment-' + parent_id));
+                            var comment = $('<div>').attr({class: 'comment'}).appendTo($(sub_comment_item));
+                            var comment_avatar_user = $('<div>').attr({class: 'comment-avatar-user'}).appendTo($(comment));
+                            var link_comment_avatar_user = $('<a>').attr({href:'javascript:void(0)'}).appendTo($(comment_avatar_user))
+                            $('<img>').attr({class:'media-object img-rounded',height:'20px',width:'20px',src:'/blog' + data[0].avatar}).appendTo($(link_comment_avatar_user));
+                            var comment_body = $('<div>').attr({class: 'comment-body'}).appendTo($(comment));
+                            var comment_body_content = $('<p>').attr({class: 'comment',style:'margin: 0;padding: 0;'}).appendTo($(comment_body));
+                            $(comment_body_content).append('<span>'+'<a href="javascript:void(0">'+data[0].username+'</a>'+'</span> '+data[0].message);
+                            $(comment_body).append('<div><small><span><a href="javascript:void(0)">Like </a></span> <span> <a href="javascript:void(0)">Comment </a></span></small><small><span><time>2 min </time></span><span>ago</span></small></div>');
+                            return;
+                        }
+                        // when type of input is comment
+                        var comment = $('<div>').attr({class: 'sub-comment-item'}).appendTo($('.comment-list#' + postId));
+                        var comment_avatar_user = $('<div>').attr({class: 'comment-avatar-user'}).appendTo($(comment));
+                        var link_comment_avatar_user = $('<a>').attr({href:'javascript:void(0)'}).appendTo($(comment_avatar_user))
+                        $('<img>').attr({class:'media-object img-rounded',height:'27px',width:'27px',src:'/blog' + data[0].avatar}).appendTo($(link_comment_avatar_user));
+                        var comment_body = $('<div>').attr({class:'comment-body',id:data[0].id}).appendTo($(comment));
+                        var sub_comment = $('<div>').attr({class:'sub-comment',id:'parent-comment-' + data[0].id}).appendTo($(comment_body));
+                        var comment_body_content = $('<p>').attr({class: 'comment',style:'margin: 0;padding: 0;'}).appendTo($(sub_comment));
+                        $(comment_body_content).append('<span>'+'<a href="javascript:void(0">'+data[0].username+'</a>'+'</span> '+data[0].message);
+                        $(sub_comment).append('<p class="comment" style = "margin: 0;padding: 0;"><small><span><a href="javascript:void(0)">Like </a></span> <span> <a href="javascript:void(0)">Comment </a></span></small><small><span><time>2 min </time></span><span>ago</span></small></p>');
+                        $('<img>').attr({style:'margin-bottom:4px',class:'img-rounded',height:'20px',width:'20px',src:'/blog' + data[0].avatar}).appendTo($(comment_body));
+                        $('<input>').attr({style:'width: 92%;margin-top:15px;',class:'sub-comment-typing',id:postId,placeholder:'Write a comment...'}).appendTo($(comment_body));
                     }
             });
         }
