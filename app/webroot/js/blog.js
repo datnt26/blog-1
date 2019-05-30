@@ -83,6 +83,7 @@ $(document).ready(function() {
                 }
             });
     });
+    createComment();
 });
 function createComment() {
     $('input').on('keypress', function (e) {
